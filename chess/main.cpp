@@ -16,11 +16,8 @@
 
 #include <vector>
 
-#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
-// Here is a small helper for you! Have a look.
-#include "ResourcePath.hpp"
 #include "Classes/BoardTiles.hpp"
 
 int main(int, char const**)
@@ -30,11 +27,6 @@ int main(int, char const**)
     
     sf::Color blackColor(163, 82, 78);
     sf::Color whiteColor(242, 232, 231);
-    
-    float board_tile_size = 100;
-    
-    int current_x = 0;
-    int current_y = 0;
 
     BoardTiles tiles(0, 0, 100, whiteColor, blackColor);
     
@@ -52,6 +44,13 @@ int main(int, char const**)
             // Escape pressed: exit
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
                 window.close();
+            }
+            
+            if (event.type == sf::Event::MouseButtonPressed) {
+                int mouseX = sf::Mouse::getPosition(window).x;
+                int mouseY = sf::Mouse::getPosition(window).y;
+                
+                tiles.mouseClick(mouseX, mouseY);
             }
         }
 
